@@ -53,8 +53,7 @@ int main()
 
             // String for Key
             // Creating a substring for Key
-            std::string key = data_to_string.substr(0, 6);
-            std::cout << "Key: " << key << std::endl;
+            std::string key = generating_key(data_to_string);
 
             // String for Value:
             // Getting the last Index before the Value
