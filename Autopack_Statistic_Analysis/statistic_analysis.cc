@@ -56,26 +56,8 @@ int main()
             std::string key = generating_key(data_to_string);
 
             // String for Value:
-            // Getting the last Index before the Value
-            std::size_t index_value = data_to_string.find_last_of(" ");
-            std::cout << "Index before Value: " << index_value << std::endl;
 
-            // Getting the Size of the whole String (Size - last index_before_the_value - 1 should be the lenght of the value)
-            std::size_t max_index_value = data_to_string.size();
-            std::cout << "Max. Index: " << max_index_value << std::endl;
-
-            // Calculating the size of the value
-            std::size_t lenght_value = max_index_value - (index_value + 1);
-
-            // Calculating the start index of the substring
-            std::size_t start_of_substr_value = index_value + 1;
-
-            std::string value = data_to_string.substr(start_of_substr_value, lenght_value);
-            std::cout << "Value: " << value << std::endl;
-
-            // Turn the string "Value" into an int to allow operations
-            int value_as_int = std::stoi(value);
-            std::cout << "Value as Int: " << value_as_int << std::endl;
+            int value_as_int = generating_value(data_to_string);
 
             // Putting values in map
 
