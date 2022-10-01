@@ -21,12 +21,11 @@ Test-Case 1:
 -Es werden zwei int-Values eingegeben, das Programm soll automatisch aus int_1 den Key und aus int_2 den dazugehörigen Value für das entprechende map_objekt erstellen
 
 */
+#include "from_inputstring_to_key_and_value.h"
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <string>
-#include <from_inputstring_to_key_and_value.h>
-
 
 void print_map(std::map<std::string, int> &test_map)
 {
