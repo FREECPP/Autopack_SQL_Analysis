@@ -48,11 +48,7 @@ int main()
     {
         while (std::getline(data_input, data_to_string))
         {
-            std::cout << data_to_string << std::endl;
-            // Making two strings out of the whole data_to_string string:
-
             // String for Key
-            // Creating a substring for Key
             std::string key = generating_key(data_to_string);
 
             // String for Value:
@@ -62,8 +58,9 @@ int main()
             // Putting values in map
 
             data_pair[key] = value_as_int;
-            print_map(data_pair);
         }
+
+        print_map(data_pair);
     }
     data_input.close();
 
