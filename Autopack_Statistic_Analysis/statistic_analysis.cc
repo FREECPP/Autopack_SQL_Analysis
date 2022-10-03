@@ -22,6 +22,7 @@ Test-Case 1:
 
 */
 #include "from_inputstring_to_key_and_value.h"
+#include "print_map.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -29,14 +30,6 @@ Test-Case 1:
 #include <string>
 
 namespace fs = std::filesystem;
-
-void print_map(std::map<std::string, int> &test_map)
-{
-    for (const auto &data : test_map)
-    {
-        std::cout << data.first << " " << data.second << std::endl;
-    }
-}
 
 int main()
 {
