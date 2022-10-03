@@ -22,10 +22,13 @@ Test-Case 1:
 
 */
 #include "from_inputstring_to_key_and_value.h"
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <string>
+
+namespace fs = std::filesystem;
 
 void print_map(std::map<std::string, int> &test_map)
 {
@@ -40,8 +43,11 @@ int main()
     // Getting the input from a file
     std::string data_to_string;
     std::ifstream data_input;
+    // Creating output file stream object
+    std::ofstream comparing_file;
     // Creating a map
     std::map<std::string, int> data_pair;
+    //
 
     data_input.open("data.txt");
     if (data_input.is_open())
@@ -62,7 +68,39 @@ int main()
 
         print_map(data_pair);
     }
+
     data_input.close();
+
+    if (fs::exists("comparing_file.txt"))
+    {
+
+        // function is missing
+        std::cout << "Test" << std::endl;
+        // function is missing
+    }
+    // maybe put content of else part into a library
+    else
+    {
+        comparing_file.open("comparing_file.txt");
+        if (comparing_file.is_open())
+        {
+            std::string input_for_comparing_file;
+            std::string cache_string_f_c;
+            data_input.open("data.txt");
+            if (data_input.is_open())
+            {
+                while (std::getline(data_input, cache_string_f_c))
+                {
+                    input_for_comparing_file += cache_string_f_c + '\n';
+                }
+            }
+            data_input.close();
+
+            comparing_file << input_for_comparing_file;
+        }
+
+        comparing_file.close();
+    }
 
     return 0;
 }
