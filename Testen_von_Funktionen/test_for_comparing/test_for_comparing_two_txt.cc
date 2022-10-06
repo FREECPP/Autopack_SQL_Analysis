@@ -1,9 +1,12 @@
 #include "from_inputstring_to_key_and_value.h"
 #include "print_map.h"
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <string>
+
+namespace fs = std::filesystem;
 
 int main()
 {
@@ -53,19 +56,38 @@ int main()
         }
     }
     input_1.close();
+    // creating the ouput file
+    std::ofstream output;
 
-    for (const auto &data : map_2)
+    // creating a while-loop to make sure an output-file is created
+    bool while_condition = true;
+    while (while_condition == true)
     {
-        auto search = map_1.find(data.first);
-        // Key of map_2 was found in map_1
-        if (search != map_1.end())
+        // checking if the output file already exists
+        output.open("output.txt");
+        if (output.is_open())
         {
-            std::cout << "Found" << std::endl;
+            // loop to iterate over the whole map
+            for (const auto &data : map_2)
+            {
+                auto search = map_1.find(data.first);
+                // Key of map_2 was found in map_1
+                if (search != map_1.end())
+                {
+                    std::cout << "Found" << std::endl;
+                }
+                // Key of map_2 was not found in map_1
+                else
+                {
+                    std::cout << "New Error:  " << data.first << ":" << data.second << std::endl;
+                }
+            }
+            // ending the while-loop
+            while_condition = false;
         }
-        // Key of map_2 was not found in map_1
         else
         {
-            std::cout << "Not found" << std::endl;
+            fs::create_directory("Testen_von_Funktionen/test_for_comparing/output.txt");
         }
     }
 
