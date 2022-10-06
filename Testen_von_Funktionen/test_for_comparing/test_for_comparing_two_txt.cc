@@ -54,5 +54,20 @@ int main()
     }
     input_1.close();
 
+    for (const auto &data : map_2)
+    {
+        auto search = map_1.find(data.first);
+        // Key of map_2 was found in map_1
+        if (search != map_1.end())
+        {
+            std::cout << "Found" << std::endl;
+        }
+        // Key of map_2 was not found in map_1
+        else
+        {
+            std::cout << "Not found" << std::endl;
+        }
+    }
+
     return 0;
 }
