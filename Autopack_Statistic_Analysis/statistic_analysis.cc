@@ -40,7 +40,11 @@ int main()
     std::ofstream comparing_file;
     // Creating a map
     std::map<std::string, int> data_pair;
-    //
+    // Getting the input from the second file
+    std::string data_to_string_2;
+    std::ifstream data_input_2;
+    // Creating second map
+    std::map<std::string, int> data_pair_2;
 
     data_input.open("data.txt");
     if (data_input.is_open())
@@ -67,9 +71,24 @@ int main()
     if (fs::exists("comparing_file.txt"))
     {
 
-        // function is missing
-        std::cout << "Test" << std::endl;
-        // function is missing
+        comparing_file.open("comparing_file.txt");
+        if (comparing_file.is_open())
+        {
+            while (std::getline(data_input_2, data_to_string_2))
+            {
+                // String for Key
+                std::string key_2 = generating_key(data_to_string_2);
+
+                // String for Value:
+
+                int value_as_int_2 = generating_value(data_to_string_2);
+
+                // Putting values in map
+
+                data_pair_2[key_2] = value_as_int_2;
+            }
+        }
+        comparing_file.close();
     }
     // maybe put content of else part into a library
     else
