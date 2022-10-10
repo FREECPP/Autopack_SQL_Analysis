@@ -83,13 +83,14 @@ int main()
                     else
                     {
                         // case if error count hasn't been increased
-                        std::cout << "Nothing" << std::endl;
+
+                        // empty but code possible
                     }
                 }
                 // Key of map_2 was not found in map_1
                 else
                 {
-                    std::cout << "New Error:  " << data.first << ":" << data.second << std::endl;
+                    output << "New Error:  " << data.first << ":" << data.second << '\n';
                 }
             }
             // ending the while-loop
