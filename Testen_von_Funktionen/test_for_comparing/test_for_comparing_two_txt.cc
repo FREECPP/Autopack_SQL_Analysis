@@ -74,7 +74,17 @@ int main()
                 // Key of map_2 was found in map_1
                 if (search != map_1.end())
                 {
-                    std::cout << "Found" << std::endl;
+                    // compare value of map_2 with value of map_1
+                    if (data.second > map_1[data.first])
+                    {
+                        // case if error count has increased
+                        output << data.first << " before: " << map_1[data.first] << " after: " << data.second << '\n';
+                    }
+                    else
+                    {
+                        // case if error count hasn't been increased
+                        std::cout << "Nothing" << std::endl;
+                    }
                 }
                 // Key of map_2 was not found in map_1
                 else
