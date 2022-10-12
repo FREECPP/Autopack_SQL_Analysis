@@ -37,7 +37,7 @@ int main()
     std::string data_to_string;
     std::ifstream data_input;
     // Creating output file stream object
-    std::ofstream comparing_file;
+    std::fstream comparing_file;
     // Creating a map
     std::map<std::string, int> data_pair;
     // Getting the input from the second file
@@ -63,7 +63,7 @@ int main()
             data_pair[key] = value_as_int;
         }
 
-        print_map(data_pair);
+        // print_map(data_pair);
     }
 
     data_input.close();
@@ -71,10 +71,10 @@ int main()
     if (fs::exists("comparing_file.txt"))
     {
 
-        comparing_file.open("comparing_file.txt");
+        comparing_file.open("comparing_file.txt", std::ios_base::in);
         if (comparing_file.is_open())
         {
-            while (std::getline(data_input_2, data_to_string_2))
+            while (std::getline(comparing_file, data_to_string_2))
             {
                 // String for Key
                 std::string key_2 = generating_key(data_to_string_2);
@@ -89,11 +89,57 @@ int main()
             }
         }
         comparing_file.close();
+
+        std::ofstream output;
+
+        // creating a while-loop to make sure an output-file is created
+        bool while_condition = true;
+        while (while_condition == true)
+        {
+            // checking if the output file already exists
+            output.open("output.txt");
+            if (output.is_open())
+            {
+                // loop to iterate over the whole map
+                for (const auto &data : data_pair)
+                {
+                    auto search = data_pair_2.find(data.first);
+                    // Key of map_2 was found in map_1
+                    if (search != data_pair_2.end())
+                    {
+                        // compare value of map_2 with value of map_1
+                        if (data.second > data_pair_2[data.first])
+                        {
+                            // case if error count has increased
+                            output << data.first << " before: " << data_pair_2[data.first] << " after: " << data.second << '\n';
+                        }
+                        else
+                        {
+                            // case if error count hasn't been increased
+
+                            // empty but code possible
+                        }
+                    }
+                    // Key of map_2 was not found in map_1
+                    else
+                    {
+                        output << "New Error:  " << data.first << ":" << data.second << '\n';
+                    }
+                }
+                // ending the while-loop
+                while_condition = false;
+            }
+            else
+            {
+                fs::create_directory("Autopack_Statistic_Analysis/output.txt");
+            }
+        }
     }
     // maybe put content of else part into a library
     else
     {
-        comparing_file.open("comparing_file.txt");
+
+        comparing_file.open("comparing_file.txt", std::ios_base::app);
         if (comparing_file.is_open())
         {
             std::string input_for_comparing_file;
