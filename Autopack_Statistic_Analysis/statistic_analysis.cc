@@ -21,6 +21,7 @@ Test-Case 1:
 -Es werden zwei int-Values eingegeben, das Programm soll automatisch aus int_1 den Key und aus int_2 den dazugehörigen Value für das entprechende map_objekt erstellen
 
 */
+#include "filling_map.h"
 #include "from_inputstring_to_key_and_value.h"
 #include "print_map.h"
 #include <filesystem>
@@ -33,62 +34,25 @@ namespace fs = std::filesystem;
 
 int main()
 {
-    // Getting the input from a file
-    std::string data_to_string;
+    // creating an input file stream object for
     std::ifstream data_input;
     // Creating output file stream object
     std::fstream comparing_file;
     // Creating a map
     std::map<std::string, int> data_pair;
-    // Getting the input from the second file
-    std::string data_to_string_2;
-    std::ifstream data_input_2;
     // Creating second map
     std::map<std::string, int> data_pair_2;
+    // declare an openmode object to specifiy the openmode
+    std::ios_base::openmode openmode_in = std::ios_base::in;
 
-    data_input.open("data.txt");
-    if (data_input.is_open())
-    {
-        while (std::getline(data_input, data_to_string))
-        {
-            // String for Key
-            std::string key = generating_key(data_to_string);
-
-            // String for Value:
-
-            int value_as_int = generating_value(data_to_string);
-
-            // Putting values in map
-
-            data_pair[key] = value_as_int;
-        }
-
-        // print_map(data_pair);
-    }
-
-    data_input.close();
+    std::string input_1 = "data.txt";
+    data_pair = filling_map(openmode_in, input_1);
 
     if (fs::exists("comparing_file.txt"))
     {
 
-        comparing_file.open("comparing_file.txt", std::ios_base::in);
-        if (comparing_file.is_open())
-        {
-            while (std::getline(comparing_file, data_to_string_2))
-            {
-                // String for Key
-                std::string key_2 = generating_key(data_to_string_2);
-
-                // String for Value:
-
-                int value_as_int_2 = generating_value(data_to_string_2);
-
-                // Putting values in map
-
-                data_pair_2[key_2] = value_as_int_2;
-            }
-        }
-        comparing_file.close();
+        std::string comp_input = "comparing_file.txt";
+        data_pair_2 = filling_map(openmode_in, comp_input);
 
         std::ofstream output;
 
